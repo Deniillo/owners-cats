@@ -1,0 +1,38 @@
+version: "3.2"
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "guest"
+  api:
+    image: postgres
+    restart: always
+    ports:
+      - "8003:5432"
+    environment:
+      POSTGRES_DB: "users"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+  cats:
+    image: postgres
+    restart: always
+    ports:
+      - "8004:5432"
+    environment:
+      POSTGRES_DB: "cats"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+  owners:
+    image: postgres
+    restart: always
+    ports:
+      - "8005:5432"
+    environment:
+      POSTGRES_DB: "owners"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
